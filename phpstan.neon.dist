@@ -1,0 +1,12 @@
+parameters:
+  paths:
+    - /source/src
+  level: 8
+  bootstrapFiles:
+    - phar:///pocketmine/PocketMine-MP.phar/vendor/autoload.php
+  scanDirectories:
+    - phar:///deps/TransferCheck.phar/src/
+    - phar:///source/vendor/libpmquery.phar/src/
+  excludes_analyse:
+    - source/vendor
+  checkMissingIterableValueType: false
