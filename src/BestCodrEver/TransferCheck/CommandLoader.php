@@ -4,6 +4,7 @@ namespace BestCodrEver\TransferCheck;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
+use pocketmine\command\Command;
 use BestCodrEver\TransferCheck\TransferCommand;
 
 class CommandLoader extends PluginBase {
