@@ -1,0 +1,6 @@
+name: TransferCheck
+main: BestCodrEver\TransferCheck\CommandLoader
+version: 1.0.0
+api: 3.0.0
+author: BestCodrEver
+website: "https://github.com/BestCodrEver/TransferCheck"
