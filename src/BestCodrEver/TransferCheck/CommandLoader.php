@@ -14,7 +14,7 @@ class CommandLoader extends PluginBase {
         if($command !== null){
           $commandMap->unregister($command);
         }
-        $commandMap->registerCommands($plugin->getName(), new TransferCommand($plugin));
+        $commandMap->register(new TransferCommand($this));
     }
     
 }
