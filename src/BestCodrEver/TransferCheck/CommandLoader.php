@@ -10,7 +10,10 @@ class CommandLoader extends PluginBase {
 
     public function onEnable(){
         $commandMap = Server::getInstance()->getCommandMap();
-        $commandMap->unregister($commandMap->getCommand('transferserver'));
+        $command = $commandMap->getCommand('transferserver');
+        if($command !== null){
+          $commandMap->unregister($command);
+        }
         $commandMap->registerCommands($plugin->getName(), new TransferCommand($plugin));
     }
     
