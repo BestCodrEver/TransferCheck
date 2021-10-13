@@ -38,7 +38,32 @@ class TransferCommand extends Command implements PluginIdentifiableCommand {
 			return false;
 		}
 
-		$sender->transfer($args[0], (int) ($args[1] ?? 19132));
+        $plugin->getServer()->getAsyncPool()->submitTask(new class($sender, $args) extends AsyncTask{
+            public function __construct(Player $sender, $args)
+                $this->storeLocal([$sender, $args]);
+            }
+            public function onRun(): void{
+                $args = $this->fetchLocal()[1];
+                try{
+                    $query = PMQuery::query($args[0], (int) ($args[1] ?? 19132));
+                    $this->setResult($query);
+                }catch(PmQueryException $e){
+                    $this->setResult("Error");
+                }
+            }
+            public function onCompletion(Server $server): void{
+                $query = $this->getResult();
+                $player = $this->fetchLocal()[0];
+                $args = $this->fetchLocal()[1];
+                if($query === null) return;
+                if ($query === "Error"){
+                    $player->sendMessage("§cThat server is offline. Try again later.");
+                    return;
+                }else {
+                    $sender->transfer($args[0], (int) ($args[1] ?? 19132));
+                }
+            }
+        });
 
 		return true;
 	}
